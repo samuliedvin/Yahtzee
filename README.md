@@ -4,11 +4,17 @@ Luokat
 Noppa, pisteidenlaskija, main
 
 Metodit
+
 Kaikkien noppien heitto
+
 Tiettyjen noppien reroll
+
 Nopalle numeron arpominen
+
 Käden tarkastavat metodit
+
 Käden yhteenlasku
+
 Toimintaperiaate
 
 Pyrimme toutettamaan Yatzy-pelin, muutamaa sääntöä mahdollisesti muuttaen.
