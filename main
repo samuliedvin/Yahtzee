@@ -1,1 +1,28 @@
 
+import java.util.ArrayList;
+
+public class Yahtzee {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList<Integer> p1score = new ArrayList<Integer>();
+		ArrayList<Integer> p2score = new ArrayList<Integer>();
+		
+		int[] scoreboard = new int[13];
+		
+		Hand test = new Hand();
+		test.throwHand();
+		int[] testArray = test.getHand();
+		for (int i = 0; i < 5; i++){
+			System.out.println(testArray[i]);
+		}
+		test.throwHand();
+		System.out.println("Reroll");
+		for (int i = 0; i < 5; i++){
+			System.out.println(testArray[i]);
+		}
+		
+
+	}
+
+}
