@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+
+/**
+ * @author Jali
+ *
+ */
+public class Hand {
+	protected Dice dice1;
+	protected Dice dice2;
+	protected Dice dice3;
+	protected Dice dice4;
+	protected Dice dice5;
+	protected ArrayList<Dice> dices = new ArrayList<Dice>();
+	
+	public Hand(){ //luo käden, luo viisi noppaa, lisää nopat arraylistaan
+		dice1 = new Dice(); dices.add(dice1);
+		dice2 = new Dice(); dices.add(dice2);
+		dice3 = new Dice(); dices.add(dice3);
+		dice4 = new Dice(); dices.add(dice4);
+		dice5 = new Dice(); dices.add(dice5);
+	}
+	public void throwHand(){ //heittää kaikille nopille uudet arvot
+		for (int i = 0; i < 5; i++){
+			dices.get(i).throwDice();
+		}
+	}
+	public int[] getHand(){ //palauttaa taulun noppien silmäluvuista
+		int[] numbers = new int[5];
+		for (int i = 0; i < 5; i++){
+			numbers[0] = dices.get(i).getValue();
+		}return numbers;
+	}
+
+}
