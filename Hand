@@ -29,8 +29,7 @@ public class Hand {
 	 * AE: 6 > diceNumber > 0, 
 	 */
 	public void rerollDice(int diceNumber){ //heittää uudestaan annetun nopan
-		dices.get(diceNumber + 1).throwDice();
-		
+		dices.get(diceNumber - 1).throwDice();
 	}
 	public int[] getHand(){ //palauttaa taulun noppien silmäluvuista
 		int[] numbers = new int[5];
