@@ -16,14 +16,11 @@ public class Yahtzee {
 			System.out.println(testArray[i]);
 		}
 		System.out.println("Reroll");
-		/*Hand setti2 = new Hand();
-		setti2.throwHand();
-		int[] settiArray = setti2.getHand();*/
-		test.throwHand();
+		test.rerollDice(1);
+		testArray = test.getHand();
 		for (int i = 0; i < 5; i++){
 			System.out.println(testArray[i]);
 		}
-		
 
 	}
 
