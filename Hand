@@ -24,11 +24,20 @@ public class Hand {
 			dices.get(i).throwDice();
 		}
 	}
+	/**
+	 * @param diceNumber silmäluku
+	 * AE: 6 > diceNumber > 0, 
+	 */
+	public void rerollDice(int diceNumber){ //heittää uudestaan annetun nopan
+		dices.get(diceNumber + 1).throwDice();
+		
+	}
 	public int[] getHand(){ //palauttaa taulun noppien silmäluvuista
 		int[] numbers = new int[5];
 		for (int i = 0; i < 5; i++){
 			numbers[0] = dices.get(i).getValue();
 		}return numbers;
 	}
+	
 
 }
