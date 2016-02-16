@@ -1,0 +1,174 @@
+import java.util.Arrays;
+
+public class checkHand {
+	protected int counter;
+	protected int[] dice;
+	protected int help;
+	
+	public checkHand(int[] dice){
+		this.dice = dice;
+	}
+
+	public int checkOne(){
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 1){
+				counter = counter + 1;
+			}
+		}
+		return counter;
+	}
+	
+	public int checkTwo(){
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 2){
+				counter = counter + 1;
+			}
+		}
+		return (counter * 2);
+	}
+	
+	public int checkThree(){
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 3){
+				counter = counter + 1;
+			}
+		}
+		return (counter * 3);
+	}
+	
+	public int checkFour(){
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 4){
+				counter = counter + 1;
+			}
+		}
+		return (counter * 4);
+	}
+	
+	public int checkFive(){
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 5){
+				counter = counter + 1;
+			}
+		}
+		return (counter * 5);
+	}
+	
+	public int checkSix(){
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 6){
+				counter = counter + 1;
+			}
+		}
+		return (counter * 6);
+	}
+	
+	public int checkYahtzee(){
+		counter = 50;
+		help = 0;
+		for(int i = 1; i < dice.length; i++){
+			if(dice[0] == dice[i]){
+				help = help + 1;
+			}
+		}
+		if(help == 4){
+			return counter;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	public int checkThreeofaKind(){
+		boolean is = false;
+		int[] die = new int[5];
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			die[i] = dice[i];
+		}
+		Arrays.sort(die);
+		for(int j = 0; j < die.length - 3; j++){
+			if(die[j] == die[j+1] && die[j+1] == die[j+2]){
+				is = true;
+				counter = die[j] + die[j+1] + die[j+2];
+			}
+		}
+		if(is == true){
+			return counter;
+		}
+		else{
+			return 0;
+		}
+	}
+	public int checkFourofaKind(){
+		boolean is = false;
+		int[] die = new int[5];
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			die[i] = dice[i];
+		}
+		Arrays.sort(die);
+		for(int j = 0; j < die.length - 3; j++){
+			if(die[j] == die[j+1] && die[j+1] == die[j+2] && die[j+2] == die[j+3]){
+				is = true;
+				counter = die[j] + die[j+1] + die[j+2] + die[j+3];
+			}
+		}
+		if(is == true){
+			return counter;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	public int checkSmallStraight(){
+		int[] die = new int[5];
+		
+		counter = 25;
+		for(int i = 0; i < dice.length; i++){
+			die[i] = dice[i];
+		}
+		Arrays.sort(die);
+		String s =  "" + die[0] + die[1] + die[2] + die[3] + die[4]+"";
+		if(s.indexOf("1") != -1 && s.indexOf("2") != -1 && s.indexOf("3") != -1 && s.indexOf("4") != -1 && s.indexOf("5") != -1){
+			return counter;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	public int checkLargeStraight(){
+		int[] die = new int[5];
+		
+		counter = 25;
+		for(int i = 0; i < dice.length; i++){
+			die[i] = dice[i];
+		}
+		Arrays.sort(die);
+		String s =  "" + die[0] + die[1] + die[2] + die[3] + die[4]+"";
+		if(s.indexOf("6") != -1 && s.indexOf("2") != -1 && s.indexOf("3") != -1 && s.indexOf("4") != -1 && s.indexOf("5") != -1){
+			return counter;
+		}
+		else{
+			return 0;
+		}
+	}
+	public int checkChanche(){
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			counter = counter + dice[i];
+		}
+		return counter;
+	}
+	
+}
+	
+	
