@@ -161,7 +161,7 @@ public class checkHand {
 			return 0;
 		}
 	}
-	public int checkChanche(){
+	public int checkChance(){
 		counter = 0;
 		for(int i = 0; i < dice.length; i++){
 			counter = counter + dice[i];
