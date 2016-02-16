@@ -1,0 +1,21 @@
+/**
+ * @author Jali
+ *
+ */
+import java.util.Random;
+public class Dice {
+	protected int value = -50; //nähdään helposti jos noppaa ei ole vielä heitetty
+	Random rng = new Random();
+	
+	//arvotaan luku väliltä 1-6
+	public void throwDice(){
+		value = rng.nextInt(6) + 1;
+	}
+	//palauta luku
+	public int getValue(){
+		return value;
+	}
+	
+	
+
+}
