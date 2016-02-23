@@ -4,11 +4,6 @@ public class Yahtzee {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ArrayList<Integer> p1score = new ArrayList<Integer>();
-		ArrayList<Integer> p2score = new ArrayList<Integer>();
-		
-		int[] scoreboard = new int[13];
-		boolean[] totuustaulu = new boolean[13];
 		
 		Hand test = new Hand();
 		test.throwHand();
@@ -28,13 +23,25 @@ public class Yahtzee {
 		int three = checker.checkThree();
 		int four = checker.checkFour();
 		int five = checker.checkFive();
-		int yahtzee = checker.checkYahtzee();
 		int threeOAK = checker.checkThreeofaKind();
 		int fourOAK = checker.checkFourofaKind();
 		int smallS = checker.checkSmallStraight();
 		int largeS = checker.checkLargeStraight();
 		int chance = checker.checkChance();
+		int yahtzee = checker.checkYahtzee();
+		int house = 0;
+		
+		ArrayList<Integer> p1score = new ArrayList<Integer>();
+		ArrayList<Integer> p2score = new ArrayList<Integer>();
+		int[] score = new int[13];
+		if (one+two+three+four+five > 63){score[0] = 35;}
+		score[1] = one; score[2] = two; score[3] = three;
+		score[4] = four; score[5] = five; score[6] = threeOAK;
+		score[7] = fourOAK; score[8] = smallS; score[9] = largeS;
+		score[10] = chance; score[11] = house; score[12] = yahtzee;
+		}
+		
+		boolean[] totuustaulu = new boolean[13];
+		
 
 	}
-
-}
