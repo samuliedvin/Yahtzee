@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Yahtzee {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Scanner reader = new Scanner(System.in);
 		
 		Hand test = new Hand();
 		test.throwHand();
@@ -23,11 +25,14 @@ public class Yahtzee {
 		
 		//pelaajien omat pistetaulut
 		ArrayList<Integer> p1score = new ArrayList<Integer>();
+		for (int i = 0; i< 13; i++){
+			p1score.add(0);
+		}
 		ArrayList<Integer> p2score = new ArrayList<Integer>();
 		
 		//tyhjä lista joka osoitetaan kohti sillä hetkellä 
 		//aktiivista pelaajaa
-		ArrayList<Integer> current;
+		ArrayList<Integer> current = p1score;
 		//boolean-taulu, josta nähdään mitkä kädet pelaaja
 		//on jo valinnut
 		boolean[] boolP1 = new boolean[13];
@@ -51,8 +56,10 @@ public class Yahtzee {
 		score[11] = 0;
 		score[12] = checker.checkYahtzee();
 		
-		
-		
+		System.out.println("Numero");
+		int input = reader.nextInt();
+		current.add(input, score[input]);
+		System.out.println(current.get(input));
 
 	}
 }
