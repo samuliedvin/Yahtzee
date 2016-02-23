@@ -1,12 +1,17 @@
 import java.util.Arrays;
 
+/**
+ * 
+ * @author Roni
+ *
+ */
+
 public class checkHand {
 	protected int counter;
 	protected int[] dice;
 	protected int help;
 	
-	public checkHand(int[] dice){
-		this.dice = dice;
+	public checkHand(){
 	}
 
 	public int checkOne(){
@@ -93,7 +98,7 @@ public class checkHand {
 			die[i] = dice[i];
 		}
 		Arrays.sort(die);
-		for(int j = 0; j < die.length - 3; j++){
+		for(int j = 0; j < die.length - 2; j++){
 			if(die[j] == die[j+1] && die[j+1] == die[j+2]){
 				is = true;
 				counter = die[j] + die[j+1] + die[j+2];
@@ -161,7 +166,7 @@ public class checkHand {
 			return 0;
 		}
 	}
-	public int checkChance(){
+	public int checkChanche(){
 		counter = 0;
 		for(int i = 0; i < dice.length; i++){
 			counter = counter + dice[i];
@@ -169,6 +174,48 @@ public class checkHand {
 		return counter;
 	}
 	
+	public int checkFullHouse(){
+		
+		// koloset
+		boolean kolmoset = false;
+		boolean pari = false;
+		int[] die = new int[5];
+		counter = 0;
+		help = 0;
+		int koloNumero = 0;
+		for(int i = 0; i < dice.length; i++){
+			die[i] = dice[i];
+		}
+		Arrays.sort(die);
+		for(int j = 0; j < die.length - 2; j++){
+			if(die[j] == die[j+1] && die[j+1] == die[j+2]){
+				kolmoset = true;
+				koloNumero = j;
+				counter = die[j] + die[j+1] + die[j+2];	
+			}
+		}
+		die[koloNumero] = -1;
+		die[koloNumero + 1] = -2;
+		die[koloNumero + 2] = -3;
+		Arrays.sort(die);
+		// parin tarkistus
+		for(int x = 0; x < die.length - 1; x++){
+			if(die[x] == die[x+1]){
+				pari = true;
+				help = die[x] + die[x+1];	
+			}
+		}
+		if( pari == true && kolmoset == true){
+			return (help + counter);
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	public void setHand(int[] dice){
+		this.dice = dice;
+	}
 }
 	
 	
