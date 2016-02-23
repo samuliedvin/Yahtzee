@@ -17,10 +17,21 @@ public class Yahtzee {
 		for (int i = 0; i < 5; i++){
 			System.out.println(testArray[i]);
 		}
+		
+		//olio, joka tarkastaa käsien antamat pistemäärät
 		checkHand checker = new checkHand(testArray);
 		
+		//pelaajien omat pistetaulut
 		ArrayList<Integer> p1score = new ArrayList<Integer>();
 		ArrayList<Integer> p2score = new ArrayList<Integer>();
+		
+		//tyhjä lista joka osoitetaan kohti sillä hetkellä 
+		//aktiivista pelaajaa
+		ArrayList<Integer> current;
+		//boolean-taulu, josta nähdään mitkä kädet pelaaja
+		//on jo valinnut
+		boolean[] boolP1 = new boolean[13];
+		boolean[] boolP2 = new boolean[13];
 		
 		//luodaan pistetaulukko, johon ilmestyy jokainen pelaajalle tarjottu
 		//pistemäärä
@@ -39,7 +50,9 @@ public class Yahtzee {
 		score[10] = checker.checkChance();
 		score[11] = 0;
 		score[12] = checker.checkYahtzee();
-		boolean[] totuustaulu = new boolean[13];
+		
+		
 		
 
 	}
+}
