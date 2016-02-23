@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 public class Yahtzee {
@@ -9,6 +8,7 @@ public class Yahtzee {
 		ArrayList<Integer> p2score = new ArrayList<Integer>();
 		
 		int[] scoreboard = new int[13];
+		boolean[] totuustaulu = new boolean[13];
 		
 		Hand test = new Hand();
 		test.throwHand();
@@ -16,12 +16,24 @@ public class Yahtzee {
 		for (int i = 0; i < 5; i++){
 			System.out.println(testArray[i]);
 		}
-		test.throwHand();
 		System.out.println("Reroll");
+		test.rerollDice(1);
+		testArray = test.getHand();
 		for (int i = 0; i < 5; i++){
 			System.out.println(testArray[i]);
 		}
-		
+		checkHand checker = new checkHand(testArray);
+		int one = checker.checkOne();
+		int two = checker.checkTwo();
+		int three = checker.checkThree();
+		int four = checker.checkFour();
+		int five = checker.checkFive();
+		int yahtzee = checker.checkYahtzee();
+		int threeOAK = checker.checkThreeofaKind();
+		int fourOAK = checker.checkFourofaKind();
+		int smallS = checker.checkSmallStraight();
+		int largeS = checker.checkLargeStraight();
+		int chance = checker.checkChance();
 
 	}
 
