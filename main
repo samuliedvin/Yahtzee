@@ -18,29 +18,27 @@ public class Yahtzee {
 			System.out.println(testArray[i]);
 		}
 		checkHand checker = new checkHand(testArray);
-		int one = checker.checkOne();
-		int two = checker.checkTwo();
-		int three = checker.checkThree();
-		int four = checker.checkFour();
-		int five = checker.checkFive();
-		int threeOAK = checker.checkThreeofaKind();
-		int fourOAK = checker.checkFourofaKind();
-		int smallS = checker.checkSmallStraight();
-		int largeS = checker.checkLargeStraight();
-		int chance = checker.checkChance();
-		int yahtzee = checker.checkYahtzee();
-		int house = 0;
 		
 		ArrayList<Integer> p1score = new ArrayList<Integer>();
 		ArrayList<Integer> p2score = new ArrayList<Integer>();
-		int[] score = new int[13];
-		if (one+two+three+four+five > 63){score[0] = 35;}
-		score[1] = one; score[2] = two; score[3] = three;
-		score[4] = four; score[5] = five; score[6] = threeOAK;
-		score[7] = fourOAK; score[8] = smallS; score[9] = largeS;
-		score[10] = chance; score[11] = house; score[12] = yahtzee;
-		}
 		
+		//luodaan pistetaulukko, johon ilmestyy jokainen pelaajalle tarjottu
+		//pistemäärä
+		int[] score = new int[13];
+		score[1] = checker.checkOne();
+		score[2] = checker.checkTwo();
+		score[3] = checker.checkThree();
+		score[4] = checker.checkFour();
+		score[5] = checker.checkFive();
+		if (score[1] + score[2] + score[3] + score[4]+ score[5] 
+				> 63){score[0] = 35;}
+		score[6] = checker.checkThreeofaKind();
+		score[7] = checker.checkFourofaKind();
+		score[8] = checker.checkSmallStraight();
+		score[9] = checker.checkLargeStraight();
+		score[10] = checker.checkChance();
+		score[11] = 0;
+		score[12] = checker.checkYahtzee();
 		boolean[] totuustaulu = new boolean[13];
 		
 
