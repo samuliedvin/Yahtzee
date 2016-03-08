@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.io.IOException;
+
 import java.util.Scanner;
 
 public class Yahtzee {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		Scanner reader = new Scanner(System.in);
 		
@@ -13,15 +15,10 @@ public class Yahtzee {
 		for (int i = 0; i < 5; i++){
 			System.out.println(testArray[i]);
 		}
-		System.out.println("Reroll");
-		test.rerollDice(1);
-		testArray = test.getHand();
-		for (int i = 0; i < 5; i++){
-			System.out.println(testArray[i]);
-		}
 		
 		//olio, joka tarkastaa käsien antamat pistemäärät
-		checkHand checker = new checkHand(testArray);
+		checkHand checker = new checkHand();
+		checker.setHand(testArray);
 		
 		//pelaajien omat pistetaulut
 		ArrayList<Integer> p1score = new ArrayList<Integer>();
@@ -29,7 +26,9 @@ public class Yahtzee {
 			p1score.add(0);
 		}
 		ArrayList<Integer> p2score = new ArrayList<Integer>();
-		
+		for (int i = 0; i<13;i++){
+			p2score.add(0);
+		}
 		//tyhjä lista joka osoitetaan kohti sillä hetkellä 
 		//aktiivista pelaajaa
 		ArrayList<Integer> current = p1score;
@@ -37,6 +36,7 @@ public class Yahtzee {
 		//on jo valinnut
 		boolean[] boolP1 = new boolean[13];
 		boolean[] boolP2 = new boolean[13];
+		boolean[] boolCurrent;
 		
 		//luodaan pistetaulukko, johon ilmestyy jokainen pelaajalle tarjottu
 		//pistemäärä
@@ -53,13 +53,23 @@ public class Yahtzee {
 		score[8] = checker.checkSmallStraight();
 		score[9] = checker.checkLargeStraight();
 		score[10] = checker.checkChance();
-		score[11] = 0;
+		score[11] = checker.checkFullHouse();
 		score[12] = checker.checkYahtzee();
 		
-		System.out.println("Numero");
+		//Pisteiden testaus
+		System.out.println("Numero:");
 		int input = reader.nextInt();
 		current.add(input, score[input]);
 		System.out.println(current.get(input));
+		
+		//***********
+		//* TALLENNUS
+		//***********
+		String file_path = "C:/Users/Public/Documents/text.txt";
+		PrintTest printer = new PrintTest(file_path);
+		printer.writeToFile("Test.");
+		printer.writeToFile("Scubabadobadii");
 
 	}
+	
 }
