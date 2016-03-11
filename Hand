@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author Jali
@@ -11,6 +12,10 @@ public class Hand {
 	protected Dice dice4;
 	protected Dice dice5;
 	protected ArrayList<Dice> dices = new ArrayList<Dice>();
+	protected int counter;
+	protected int help;
+	protected int[] dice;
+	
 	
 	public Hand(){ //luo käden, luo viisi noppaa, lisää nopat arraylistaan
 		dice1 = new Dice(); dices.add(dice1);
@@ -19,24 +24,328 @@ public class Hand {
 		dice4 = new Dice(); dices.add(dice4);
 		dice5 = new Dice(); dices.add(dice5);
 	}
-	public void throwHand(){ //heittää kaikille nopille uudet arvot
+	
+	/*public void throwHand(){ //heittää kaikille nopille uudet arvot
 		for (int i = 0; i < 5; i++){
 			dices.get(i).throwDice();
 		}
-	}
+	}*/
+	
 	/**
 	 * @param diceNumber silmäluku
 	 * AE: 6 > diceNumber > 0, 
 	 */
-	public void rerollDice(int diceNumber){ //heittää uudestaan annetun nopan
-		dices.get(diceNumber - 1).throwDice();
+	
+	public void throwHand(boolean[] valitut){ //heittää uudestaan annetun nopan
+		for (int i=0;i<dices.size(); i++) {	
+			if (!valitut[i]) {
+				dices.get(i).throwDice();
+				dices.set(i, dices.get(i));
+			}
+		}
 	}
 	public int[] getHand(){ //palauttaa taulun noppien silmäluvuista
 		int[] numbers = new int[5];
 		for (int i = 0; i < 5; i++){
 			numbers[i] = dices.get(i).getValue();
-		}return numbers;
+		}
+		return numbers;
 	}
 	
+	public int getSum() {
+		int sum = 0;
+		for(int i = 0; i<5; i++) {
+			sum = sum + dices.get(i).getValue();
+		}
+		return sum;
+	}
 
+	
+	/*
+	 * 
+	 * Kädentarkistusmetodit alkavat tästä!
+	 * 
+	 * 
+	 */
+	
+	
+	public int checkOne(){
+		dice = this.getHand();
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 1){
+				counter = counter + 1;
+			}
+		}
+		return counter;
+	}
+	
+	public int checkTwo(){
+		dice = this.getHand();
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 2){
+				counter = counter + 1;
+			}
+		}
+		return (counter * 2);
+	}
+	
+	public int checkThree(){
+		dice = this.getHand();
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 3){
+				counter = counter + 1;
+			}
+		}
+		return (counter * 3);
+	}
+	
+	public int checkFour(){
+		dice = this.getHand();
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 4){
+				counter = counter + 1;
+			}
+		}
+		return (counter * 4);
+	}
+	
+	public int checkFive(){
+		dice = this.getHand();
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 5){
+				counter = counter + 1;
+			}
+		}
+		return (counter * 5);
+	}
+	
+	public int checkSix(){
+		dice = this.getHand();
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			if(dice[i] == 6){
+				counter = counter + 1;
+			}
+		}
+		return (counter * 6);
+	}
+	
+	public int checkYahtzee(){
+		dice = this.getHand();
+		counter = 50;
+		help = 0;
+		for(int i = 1; i < dice.length; i++){
+			if(dice[0] == dice[i]){
+				help = help + 1;
+			}
+		}
+		if(help == 4){
+			return counter;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	public int checkThreeofaKind(){
+		dice = this.getHand();
+		boolean is = false;
+		int[] die = new int[5];
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			die[i] = dice[i];
+		}
+		Arrays.sort(die);
+		for(int j = 0; j < die.length - 2; j++){
+			if(die[j] == die[j+1] && die[j+1] == die[j+2]){
+				is = true;
+				counter = die[j] + die[j+1] + die[j+2];
+			}
+		}
+		if(is == true){
+			return counter;
+		}
+		else{
+			return 0;
+		}
+	}
+	public int checkFourofaKind(){
+		dice = this.getHand();
+		boolean is = false;
+		int[] die = new int[5];
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			die[i] = dice[i];
+		}
+		Arrays.sort(die);
+		for(int j = 0; j < die.length - 3; j++){
+			if(die[j] == die[j+1] && die[j+1] == die[j+2] && die[j+2] == die[j+3]){
+				is = true;
+				counter = die[j] + die[j+1] + die[j+2] + die[j+3];
+			}
+		}
+		if(is == true){
+			return counter;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	public int checkSmallStraight(){
+		dice = this.getHand();
+		int[] die = new int[5];
+		
+		counter = 15;
+		for(int i = 0; i < dice.length; i++){
+			die[i] = dice[i];
+		}
+		Arrays.sort(die);
+		String s =  "" + die[0] + die[1] + die[2] + die[3] + die[4]+"";
+		if(s.indexOf("1") != -1 && s.indexOf("2") != -1 && s.indexOf("3") != -1 && s.indexOf("4") != -1 && s.indexOf("5") != -1){
+			return counter;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	public int checkLargeStraight(){
+		dice = this.getHand();
+		int[] die = new int[5];
+		
+		counter = 20;
+		for(int i = 0; i < dice.length; i++){
+			die[i] = dice[i];
+		}
+		Arrays.sort(die);
+		String s =  "" + die[0] + die[1] + die[2] + die[3] + die[4]+"";
+		if(s.indexOf("6") != -1 && s.indexOf("2") != -1 && s.indexOf("3") != -1 && s.indexOf("4") != -1 && s.indexOf("5") != -1){
+			return counter;
+		}
+		else{
+			return 0;
+		}
+	}
+	public int checkChance(){
+		dice = this.getHand();
+		counter = 0;
+		for(int i = 0; i < dice.length; i++){
+			counter = counter + dice[i];
+		}
+		return counter;
+	}
+	
+	public int checkFullHouse(){
+		dice = this.getHand();
+		
+		// koloset
+		boolean kolmoset = false;
+		boolean pari = false;
+		int[] die = new int[5];
+		counter = 0;
+		help = 0;
+		int koloNumero = 0;
+		for(int i = 0; i < dice.length; i++){
+			die[i] = dice[i];
+		}
+		Arrays.sort(die);
+		for(int j = 0; j < die.length - 2; j++){
+			if(die[j] == die[j+1] && die[j+1] == die[j+2]){
+				kolmoset = true;
+				koloNumero = j;
+				counter = die[j] + die[j+1] + die[j+2];	
+			}
+		}
+		die[koloNumero] = -1;
+		die[koloNumero + 1] = -2;
+		die[koloNumero + 2] = -3;
+		Arrays.sort(die);
+		// parin tarkistus
+		for(int x = 0; x < die.length - 1; x++){
+			if(die[x] == die[x+1]){
+				pari = true;
+				help = die[x] + die[x+1];	
+			}
+		}
+		if( pari == true && kolmoset == true){
+			return (help + counter);
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	public int checkPair() {
+		counter = 0;
+		{
+			dice = this.getHand();
+			boolean is = false;
+			int[] die = new int[5];
+			counter = 0;
+			for(int i = 0; i < dice.length; i++){
+				die[i] = dice[i];
+			}
+			Arrays.sort(die);
+			for(int j = 0; j < die.length - 1; j++){
+				if(die[j] == die[j+1]){
+					counter=0;
+					is = true;
+					counter = die[j] + die[j+1];
+				}
+			}
+			if(is == true){
+				return counter;
+			}
+			else{
+				return 0;
+			}
+		}
+		
+	}
+	
+	public int checkTwoPairs() {
+		{
+			dice = this.getHand();
+			boolean pari1 = false;
+			boolean pari2 = false;
+			
+			int[] die = new int[5];
+			counter = 0;
+			help = 0;
+			for(int i = 0; i < dice.length; i++){
+				die[i] = dice[i];
+			}
+			Arrays.sort(die);
+			for(int j = 0; j < die.length - 1; j++){
+				if (pari1) {
+					if(die[j] == die[j+1]){
+						pari2 = true;
+						counter = counter + die[j] + die[j+1];
+						j++;
+					}
+					continue;
+				}
+				
+				if(die[j] == die[j+1]){
+					counter=0;
+					pari1 = true;
+					counter = die[j] + die[j+1];
+					j++;
+				}
+				
+			}
+			if(pari1 && pari2){
+				return counter;
+			}
+			else{
+				return 0;
+			}
+		}
+	}
 }
