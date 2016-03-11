@@ -1,6 +1,10 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Yahtzee {
@@ -57,19 +61,33 @@ public class Yahtzee {
 		score[12] = checker.checkYahtzee();
 		
 		//Pisteiden testaus
-		System.out.println("Numero:");
+		/*System.out.println("Numero:");
 		int input = reader.nextInt();
 		current.add(input, score[input]);
 		System.out.println(current.get(input));
+		*/
 		
 		//***********
 		//* TALLENNUS
 		//***********
-		String file_path = "C:/Users/Public/Documents/text.txt";
-		PrintTest printer = new PrintTest(file_path);
-		printer.writeToFile("Test.");
-		printer.writeToFile("Scubabadobadii");
+		
+		//merkkijono osoittaa tallennustiedostoon
+		String P1_score = "C:/Users/Public/Documents/sheet1.txt";
+		String P2_sheet = "C:/Users/Public/Documents/sheet2.txt";
+		String file_pathTEST = "C:/Users/Public/Documents/testing.txt";
+		//luodaan tulostava olio
+		Save printTEST = new Save(file_pathTEST);
+		//testilista
+		ArrayList<Integer> tempLIST = new ArrayList<Integer>();
+		for (int i = 0; i< 13; i++){
+			tempLIST.add(i);
+		}
+		tempLIST.add(666);
+		for (int i = 0; i<13; i++){
+			if (boolP1[i] == true){tempLIST.add(1);} 
+			else tempLIST.add(0);
+		}
+		printTEST.writeToFile(tempLIST);
 
 	}
-	
 }
