@@ -60,37 +60,26 @@ public class Yahtzee {
 		score[11] = checker.checkFullHouse();
 		score[12] = checker.checkYahtzee();
 		
-		
+	}
 		//***********
 		//* TALLENNUS
 		//***********
-		
-		//merkkijono osoittaa tallennustiedostoon
-		String p1sheet = "C:/Users/Public/Documents/sheet1.txt";
-		String p2sheet = "C:/Users/Public/Documents/sheet2.txt";
-		//luodaan tulostava olio ja kiinnitetään se tiettyyn tiedostoon
-		Save manager1 = new Save(p1sheet);
-		Save manager2 = new Save(p2sheet);
-		//testilista
-		ArrayList<Integer> tempLIST = new ArrayList<Integer>();
-		for (int i = 0; i< 13; i++){
-			tempLIST.add(i);
+	
+		/**
+		 * @param p1points Pelaajan pisteet arraylistana
+		 * @param p2points -||-
+		 * @throws IOException
+		 * @author J
+		 * Tallentaa pistelistan tekstitiedostoon muodossa *,*,*,*,...
+		 */
+		public void savePlayers(Object[][] data) throws IOException{
+			ArrayList<Integer> p1points = new ArrayList<Integer>();
+			ArrayList<Integer> p2points = new ArrayList<Integer>();
+			String p1sheet = "C:/Users/Public/Documents/sheet1.txt";
+			String p2sheet = "C:/Users/Public/Documents/sheet2.txt";
+			Save manager1 = new Save(p1sheet);
+			Save manager2 = new Save(p2sheet); 
+			manager1.writeToFile(p1points);
+			manager2.writeToFile(p2points);
 		}
-		tempLIST.add(666);
-		for (int i = 0; i<13; i++){
-			if (boolP1[i] == true){tempLIST.add(1);} 
-			else tempLIST.add(0);
-		}
-		manager1.writeToFile(tempLIST);
-		ArrayList<Integer> adding = manager1.readFromFile();
-
-		for (int i = 0; i < adding.size(); i++)
-			while (adding.get(i) != 666){
-				p1score.set(i, adding.get(i));
-			}
-		for (int i = 0; i < p1score.size(); i++){
-			System.out.println(p1score.get(i));
-		}
-
-	}
 }
