@@ -1,0 +1,54 @@
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Save{
+	private String path; //tiedostopolku
+	private boolean append_to_file = false; //määrää lisätäänkö teksti tiedoston perään vai ajetaanko yli
+	
+	public Save(String file_path){
+		path = file_path;
+	}
+	public Save(String file_path, boolean append_value){
+		path = file_path;
+		append_to_file = append_value;
+	}
+	public void writeToFile(String textLine) throws IOException{ //kirjoittaa merkkijonon tiedostoon
+		FileWriter write = new FileWriter(path, append_to_file);
+		PrintWriter print_line = new PrintWriter(write);
+		print_line.printf("%s" + "%n", textLine);
+		print_line.close();
+	}
+	public void writeToFile(ArrayList<Integer> list) throws IOException{ //kirjoittaa ArrayListan tiedostoon
+		String temp = "";
+		for (int i = 0; i<list.size(); i++){
+			temp += list.get(i) + ",";
+		}
+		FileWriter write = new FileWriter(path, append_to_file);
+		PrintWriter print_line = new PrintWriter(write);
+		print_line.printf("%s" + "%n", temp);
+		print_line.close();
+	}
+	public ArrayList<Integer> readScoreFromFile() throws FileNotFoundException{
+		//Luetaan tiedosto merkkijonoksi
+		String content = 
+		new Scanner(new File("C:/Users/Public/Documents/testing.txt")).useDelimiter("\\Z").next();
+		
+		//Muutetaan merkkijono ArrayListaksi
+		ArrayList<String> list = 
+		new ArrayList<String>(Arrays.asList(content.split(",")));
+		ArrayList<Integer> returned = new ArrayList<Integer>();
+		
+		//Muutetaan string-lista int-listaksi
+		for (int i = 0; i < list.size(); i++){
+			returned.set(i, Integer.parseInt(list.get(i)));
+		}
+		return returned;
+	}
+	
+}
