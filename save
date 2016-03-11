@@ -49,13 +49,5 @@ public class Save{
 			}
 		return returned;
 	}
-	public Object[][] readFromFileMatrice(String path, String path2) throws FileNotFoundException{
-		String content1 = 
-				new Scanner(new File(path)).useDelimiter("\\Z").next();
-		String content2 = 
-				new Scanner(new File(path2)).useDelimiter("\\Z").next();
-		String[] array1 = content1.split("\\,", -1);
-		String[] array2 = content2.split("\\,", -1);
-	}
 	
 }
