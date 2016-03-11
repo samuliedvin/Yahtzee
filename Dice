@@ -2,20 +2,18 @@
  * @author Jali
  *
  */
-import java.util.Random;
+import java.security.SecureRandom;
 public class Dice{
 	protected int value = -50; //nähdään helposti jos noppaa ei ole vielä heitetty
-	Random rnjeesus = new Random();
+	SecureRandom rnjeesus;
 	
 	//arvotaan luku väliltä 1-6
 	public void throwDice(){
+		rnjeesus = new SecureRandom();
 		value = rnjeesus.nextInt(6) + 1;
 	}
 	//palauta luku
 	public int getValue(){
 		return value;
-	}
-	public void reroller(){
-		value = rnjeesus.nextInt(6) + 1;
 	}
 }
