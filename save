@@ -9,7 +9,8 @@ import java.io.IOException;
 
 public class Save{
 	private String path; //tiedostopolku
-	private boolean append_to_file = false; //määrää lisätäänkö teksti tiedoston perään vai ajetaanko yli
+	private boolean append_to_file = false; //määrää lisätäänkö teksti tiedoston perään 
+											//vai ajetaanko yli
 	
 	public Save(String file_path){
 		path = file_path;
@@ -34,19 +35,17 @@ public class Save{
 		print_line.printf("%s" + "%n", temp);
 		print_line.close();
 	}
-	public ArrayList<Integer> readScoreFromFile() throws FileNotFoundException{
+	public ArrayList<Integer> readFromFile() throws FileNotFoundException{
 		//Luetaan tiedosto merkkijonoksi
 		String content = 
 		new Scanner(new File("C:/Users/Public/Documents/testing.txt")).useDelimiter("\\Z").next();
 		
-		//Muutetaan merkkijono ArrayListaksi
-		ArrayList<String> list = 
-		new ArrayList<String>(Arrays.asList(content.split(",")));
+		//Muutetaan merkkijono tauluksi
+		String[] array = content.split("\\,", -1);
+		//Muutetaan string-taulu int-listaksi
 		ArrayList<Integer> returned = new ArrayList<Integer>();
-		
-		//Muutetaan string-lista int-listaksi
-		for (int i = 0; i < list.size(); i++){
-			returned.set(i, Integer.parseInt(list.get(i)));
+		for (int i = 0; i <array.length-1; i++){
+			returned.add(Integer.parseInt(array[i]));
 		}
 		return returned;
 	}
