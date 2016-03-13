@@ -1,3 +1,19 @@
+Skip to content
+This repository  
+Search
+Pull requests
+Issues
+Gist
+ @samuliedvin
+ Unwatch 2
+  Star 0
+  Fork 2 Jakkara/Yahtzee
+ Code  Issues 0  Pull requests 0  Wiki  Pulse  Graphs
+Branch: master Find file Copy pathYahtzee/guidemo.java
+7c505e0  2 days ago
+@Jakkara Jakkara Update guidemo.java
+2 contributors @samuliedvin @Jakkara
+RawBlameHistory     557 lines (459 sloc)  15 KB
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -501,6 +517,61 @@ class ImagePanel extends JComponent {
         g.drawImage(image, 0, 0, this);
     }
 }	
+
+//*********************
+//* TALLENNUS JA LATAUS
+//*********************
+
+/**
+ * @param p1points Pelaajan pisteet arraylistana
+ * @param p2points -||-
+ * @throws IOException
+ * @author J
+ * Tallentaa pistelistan tekstitiedostoon muodossa *,*,*,*,...
+ */
+public void saveScores(Object[][] data) throws IOException{
+	ArrayList<Integer> p1points = new ArrayList<Integer>(); //siirretään pisteet käsittelyä varten matriisista listaan
+	ArrayList<Integer> p2points = new ArrayList<Integer>();
+	for (int i = 0; i < 15; i++){
+		p1points.add((Integer) data[i][1]);
+		p2points.add((Integer) data[i][2]);
+	}
+	
+	String p1sheet = "C:/Users/Public/Documents/sheet1.txt"; //osoitetaan tallennusolio kohti oikeaa tiedostoa
+	String p2sheet = "C:/Users/Public/Documents/sheet2.txt";
+	
+	Save manager1 = new Save(p1sheet); //molempia pelaajia vastaa oma tallennusolio
+	Save manager2 = new Save(p2sheet);
+	
+	manager1.writeToFile(p1points); //kutsutaan tallennusmetodia molemmille pelaajille
+	manager2.writeToFile(p2points);
+}
+
+
+/**
+ * @param data 3*15 matriisi joka sisältää tulokset muotoa mjono, p1-piste, p2-piste
+ * @throws FileNotFoundException 
+ */
+/**
+ * @param data matriisi pelaajien pisteistä. 3*15, jossa rivin ensimmäinen on kuvaus pisteestä, toinen ja kolmas ovat pelaajien pisteet
+ * @throws FileNotFoundException
+ */
+public void loadScores(Object[][] data) throws FileNotFoundException{
+	ArrayList<Integer> p1points = new ArrayList<Integer>();
+	ArrayList<Integer> p2points = new ArrayList<Integer>();
+	String p1sheet = "C:/Users/Public/Documents/sheet1.txt";
+	String p2sheet = "C:/Users/Public/Documents/sheet2.txt";
+	Save manager1 = new Save(p1sheet);
+	Save manager2 = new Save(p2sheet);
+	p1points = manager1.readFromFile(p1sheet);
+	p2points = manager2.readFromFile(p2sheet);
+	for (int i = 0; i < 15; i++){
+		data[i][1] = p1points.get(i);
+		data[i][2] = p2points.get(i);
+		}
+	}
+Status API Training Shop Blog About Pricing
+© 2016 GitHub, Inc. Terms Privacy Security Contact Help
 
 //*********************
 //* TALLENNUS JA LATAUS
